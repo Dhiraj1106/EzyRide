@@ -4,6 +4,7 @@ import org.example.ezyride.Entity.User;
 import org.example.ezyride.Service.UserService;
 import org.springframework.web.bind.annotation.*;
 
+
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -17,5 +18,12 @@ public class AuthController {
     @PostMapping("/register")
     public User registerUser(@RequestBody User user) {
         return userService.registerUser(user);
+    }
+    @PostMapping("/login")
+    public User loginUser(@RequestBody User user) {
+        return userService.loginUser(
+                user.getEmail(),
+                user.getPassword()
+        );
     }
 }

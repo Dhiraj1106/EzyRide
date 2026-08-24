@@ -21,4 +21,16 @@ public class UserService {
 
         return userDAO.save(user);
     }
+
+    public User loginUser(String email, String password) {
+
+        User user = userDAO.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (!user.getPassword().equals(password)) {
+            throw new RuntimeException("Invalid password");
+        }
+
+        return user;
+    }
 }
