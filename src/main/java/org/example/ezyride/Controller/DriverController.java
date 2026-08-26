@@ -18,4 +18,22 @@ public class DriverController {
     public Driver registerDriver(@RequestBody Driver driver) {
         return driverService.registerDriver(driver);
     }
+    @PutMapping("/{driverId}/online")
+    public Driver goOnline(@PathVariable Long driverId) {
+        return driverService.goOnline(driverId);
+    }
+
+    @PutMapping("/{driverId}/offline")
+    public Driver goOffline(@PathVariable Long driverId) {
+        return driverService.goOffline(driverId);
+    }
+    @PutMapping("/{driverId}/verify")
+    public Driver verifyDriver(@PathVariable Long driverId) {
+        return driverService.verifyDriver(driverId);
+    }
+
+    @PutMapping("/{driverId}/reject")
+    public Driver rejectDriver(@PathVariable Long driverId) {
+        return driverService.rejectDriver(driverId);
+    }
 }

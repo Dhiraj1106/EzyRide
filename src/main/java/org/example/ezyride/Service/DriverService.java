@@ -2,6 +2,7 @@ package org.example.ezyride.Service;
 
 import org.example.ezyride.DAO.DriverDAO;
 import org.example.ezyride.Entity.Driver;
+import org.example.ezyride.Entity.VerificationStatus;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,6 +26,45 @@ public class DriverService {
             );
         }
 
+        driver.setOnline(false);
+
+        return driverDAO.save(driver);
+    }
+    public Driver goOnline(Long driverId) {
+
+        Driver driver = driverDAO.findById(driverId)
+                .orElseThrow(() -> new RuntimeException("Driver not found"));
+
+        driver.setOnline(true);
+
+        return driverDAO.save(driver);
+    }
+
+    public Driver goOffline(Long driverId) {
+
+        Driver driver = driverDAO.findById(driverId)
+                .orElseThrow(() -> new RuntimeException("Driver not found"));
+
+        driver.setOnline(false);
+
+        return driverDAO.save(driver);
+    }
+    public Driver verifyDriver(Long driverId) {
+
+        Driver driver = driverDAO.findById(driverId)
+                .orElseThrow(() -> new RuntimeException("Driver not found"));
+
+        driver.setVerificationStatus(VerificationStatus.VERIFIED);
+
+        return driverDAO.save(driver);
+    }
+
+    public Driver rejectDriver(Long driverId) {
+
+        Driver driver = driverDAO.findById(driverId)
+                .orElseThrow(() -> new RuntimeException("Driver not found"));
+
+        driver.setVerificationStatus(VerificationStatus.REJECTED);
         driver.setOnline(false);
 
         return driverDAO.save(driver);
