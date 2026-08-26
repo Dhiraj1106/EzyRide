@@ -30,6 +30,7 @@ public class DriverService {
 
         return driverDAO.save(driver);
     }
+
     public Driver goOnline(Long driverId) {
 
         Driver driver = driverDAO.findById(driverId)
@@ -49,6 +50,7 @@ public class DriverService {
 
         return driverDAO.save(driver);
     }
+
     public Driver verifyDriver(Long driverId) {
 
         Driver driver = driverDAO.findById(driverId)
@@ -66,6 +68,27 @@ public class DriverService {
 
         driver.setVerificationStatus(VerificationStatus.REJECTED);
         driver.setOnline(false);
+
+        return driverDAO.save(driver);
+    }
+
+    public Driver getDriverById(Long driverId) {
+
+        Driver driver = driverDAO.findById(driverId).orElse(null);
+
+        return driver;
+    }
+    public Driver updateDriver(Long driverId, Driver updatedDriver) {
+
+        Driver driver = driverDAO.findById(driverId).orElse(null);
+
+        if (driver == null) {
+            return null;
+        }
+
+        driver.setLicenseNumber(updatedDriver.getLicenseNumber());
+        driver.setVehicleType(updatedDriver.getVehicleType());
+        driver.setVehicleNumber(updatedDriver.getVehicleNumber());
 
         return driverDAO.save(driver);
     }

@@ -36,4 +36,16 @@ public class DriverController {
     public Driver rejectDriver(@PathVariable Long driverId) {
         return driverService.rejectDriver(driverId);
     }
+    @GetMapping("/{driverId}")
+    public Driver getDriverById(@PathVariable Long driverId) {
+
+        return driverService.getDriverById(driverId);
+    }
+    @PutMapping("/{driverId}")
+    public Driver updateDriver(
+            @PathVariable Long driverId,
+            @RequestBody Driver driver) {
+
+        return driverService.updateDriver(driverId, driver);
+    }
 }
